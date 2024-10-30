@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "STM32",
+            "includePath": [
+                "${workspaceRoot}",
+                "${workspaceRoot}/Core/Inc",
+                "${workspaceRoot}/Drivers/STM32F1xx_HAL_Driver/Inc",
+                "${workspaceRoot}/Drivers/CMSIS/Include",
+                "${workspaceRoot}/Drivers/CMSIS/Device/ST/STM32F1xx/Include",
+                "D:/GNU/10 2021.10/arm-none-eabi/include",
+                "D:/GNU/10 2021.10/arm-none-eabi/include/c++/10.3.1",
+                "D:/GNU/10 2021.10/lib/gcc/arm-none-eabi/10.3.1/include",
+                "D:/GNU/10 2021.10/lib/gcc/arm-none-eabi/10.3.1/include-fixed",
+                "D:/GNU/10 2021.10/arm-none-eabi/include/machine",
+                "D:/GNU/10 2021.10/arm-none-eabi/include/newlib-nano",
+                "D:/GNU/10 2021.10/arm-none-eabi/include/sys"
+            
+            ],
+            "compilerPath": "D:/Eclipse_toolchain/arm/xpack-arm-none-eabi-gcc-13.2.1-1.1/bin/arm-none-eabi-gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm"
+        }
+    ],
+    "version": 4
+}

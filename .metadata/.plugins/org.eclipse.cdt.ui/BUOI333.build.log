@@ -1,0 +1,10 @@
+20:31:20 **** Incremental Build of configuration Debug for project BUOI333 ****
+make -j8 all 
+arm-none-eabi-size  BUOI333.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6748	     12	   1604	   8364	   20ac	BUOI333.elf
+Finished building: default.size.stdout
+ 
+
+20:31:21 Build Finished. 0 errors, 0 warnings. (took 742ms)
+

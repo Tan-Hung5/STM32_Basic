@@ -1,0 +1,10 @@
+20:12:10 **** Incremental Build of configuration Debug for project BT2 ****
+make -j8 all 
+arm-none-eabi-size  BT2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6276	     20	   1572	   7868	   1ebc	BT2.elf
+Finished building: default.size.stdout
+ 
+
+20:12:10 Build Finished. 0 errors, 0 warnings. (took 545ms)
+

@@ -1,0 +1,10 @@
+18:45:13 **** Incremental Build of configuration Debug for project LCDxf407 ****
+make -j8 all 
+arm-none-eabi-size  LCDxf407.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6564	     12	   1572	   8148	   1fd4	LCDxf407.elf
+Finished building: default.size.stdout
+ 
+
+18:45:13 Build Finished. 0 errors, 0 warnings. (took 335ms)
+

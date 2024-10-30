@@ -1,0 +1,10 @@
+19:28:22 **** Incremental Build of configuration Debug for project BT3 ****
+make -j8 all 
+arm-none-eabi-size  BT3.elf 
+   text	   data	    bss	    dec	    hex	filename
+   7260	     68	   1588	   8916	   22d4	BT3.elf
+Finished building: default.size.stdout
+ 
+
+19:28:22 Build Finished. 0 errors, 0 warnings. (took 252ms)
+

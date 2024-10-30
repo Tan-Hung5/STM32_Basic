@@ -1,0 +1,58 @@
+/*
+ * lcd.h
+ *
+ *  Created on: Sep 4, 2024
+ *      Author: Kingj
+ */
+
+#ifndef INC_LCD_H_
+#define INC_LCD_H_
+
+void LCD_Command(uint8_t cmd);
+void LCD_Init(void);
+void LCD_Send_Data(uint8_t data);
+void LCD_Send_String(char *str);
+
+void LCD_Init(void)
+{
+
+
+    HAL_Delay(20); // Chờ cho LCD khởi động
+
+    // Gửi chuỗi lệnh để khởi tạo LCD ở chế độ 4-bit
+    LCD_Command(0x33);
+    LCD_Command(0x32);
+    LCD_Command(0x28);
+    LCD_Command(0x0C);
+    LCD_Command(0x06);
+    LCD_Command(0x01);
+    HAL_Delay(5);
+}
+
+void LCD_Command(uint8_t cmd)
+{
+    HAL_GPIO_WritePin(RS_GPIO_Port, RS_Pin, GPIO_PIN_RESET); // RS = 0
+    HAL_GPIO_WritePin(E_GPIO_Port, E_Pin, GPIO_PIN_SET);   // E = 1
+
+    // Gửi 4 bit cao
+    HAL_GPIO_WritePin(D4_GPIO_Port, D4_Pin, (cmd & 0x10));
+    HAL_GPIO_WritePin(D5_GPIO_Port, D5_Pin, (cmd & 0x20));
+    HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, (cmd & 0x40));
+    HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, (cmd & 0x80));
+
+    HAL_GPIO_WritePin(E_GPIO_Port, E_Pin, GPIO_PIN_RESET);   // E = 1 // E = 0
+    HAL_Delay(1);
+    HAL_GPIO_WritePin(E_GPIO_Port, E_Pin, GPIO_PIN_SET);   // E = 1   // E = 1
+
+    // Gửi 4 bit thấp
+    HAL_GPIO_WritePin(D4_GPIO_Port, D4_Pin, (cmd & 0x01));
+    HAL_GPIO_WritePin(D5_GPIO_Port, D5_Pin, (cmd & 0x02));
+    HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, (cmd & 0x04));
+    HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, (cmd & 0x08));
+
+    HAL_GPIO_WritePin(E_GPIO_Port, E_Pin, GPIO_PIN_RESET); // E = 0
+    HAL_Delay(1);
+}
+
+
+#endif /* INC_LCD_H_ */

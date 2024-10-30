@@ -1,0 +1,17 @@
+../Core/Src/main.c:61:6:lcd_write_nibble	3
+../Core/Src/main.c:82:6:lcd_send_cmd	1
+../Core/Src/main.c:91:6:lcd_send_data	1
+../Core/Src/main.c:100:6:lcd_init	1
+../Core/Src/main.c:117:6:lcd_display	2
+../Core/Src/main.c:127:6:lcd_gotoxy	3
+../Core/Src/main.c:143:6:lcd_clear	1
+../Core/Src/main.c:158:6:check_char	3
+../Core/Src/main.c:169:6:check_len	6
+../Core/Src/main.c:190:6:display_data	1
+../Core/Src/main.c:197:7:getdata_from_buffer	2
+../Core/Src/main.c:211:6:check_package	3
+../Core/Src/main.c:234:5:main	3
+../Core/Src/main.c:290:6:SystemClock_Config	3
+../Core/Src/main.c:330:13:MX_USART1_UART_Init	2
+../Core/Src/main.c:363:13:MX_GPIO_Init	1
+../Core/Src/main.c:398:6:Error_Handler	1

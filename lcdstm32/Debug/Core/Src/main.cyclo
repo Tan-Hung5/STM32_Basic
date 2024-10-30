@@ -1,0 +1,13 @@
+../Core/Inc/lcd.h:12:6:lcd_set_gpio_input	1
+../Core/Inc/lcd.h:22:6:lcd_set_gpio_output	1
+../Core/Inc/lcd.h:32:6:lcd_wait_busy	3
+../Core/Inc/lcd.h:55:6:lcd_write_nibble	3
+../Core/Inc/lcd.h:79:6:lcd_send_cmd	1
+../Core/Inc/lcd.h:86:6:lcd_send_data	1
+../Core/Inc/lcd.h:94:6:lcd_init	1
+../Core/Inc/lcd.h:110:6:lcd_display	2
+../Core/Inc/lcd.h:119:6:lcd_gotoxy	3
+../Core/Src/main.c:66:5:main	1
+../Core/Src/main.c:111:6:SystemClock_Config	3
+../Core/Src/main.c:151:13:MX_GPIO_Init	1
+../Core/Src/main.c:186:6:Error_Handler	1

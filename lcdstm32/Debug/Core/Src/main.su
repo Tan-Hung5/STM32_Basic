@@ -1,0 +1,13 @@
+../Core/Inc/lcd.h:12:6:lcd_set_gpio_input	24	static
+../Core/Inc/lcd.h:22:6:lcd_set_gpio_output	24	static
+../Core/Inc/lcd.h:32:6:lcd_wait_busy	16	static,ignoring_inline_asm
+../Core/Inc/lcd.h:55:6:lcd_write_nibble	24	static,ignoring_inline_asm
+../Core/Inc/lcd.h:79:6:lcd_send_cmd	16	static
+../Core/Inc/lcd.h:86:6:lcd_send_data	16	static
+../Core/Inc/lcd.h:94:6:lcd_init	8	static
+../Core/Inc/lcd.h:110:6:lcd_display	16	static
+../Core/Inc/lcd.h:119:6:lcd_gotoxy	24	static
+../Core/Src/main.c:66:5:main	8	static
+../Core/Src/main.c:111:6:SystemClock_Config	72	static
+../Core/Src/main.c:151:13:MX_GPIO_Init	32	static
+../Core/Src/main.c:186:6:Error_Handler	4	static,ignoring_inline_asm

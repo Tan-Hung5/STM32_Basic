@@ -1,0 +1,46 @@
+<!DOCTYPE CrossStudio_Session_File>
+<session>
+ <Bookmarks/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
+ </Breakpoints>
+ <ExecutionProfileWindow/>
+ <FrameBuffer/>
+ <Memory1/>
+ <Memory2/>
+ <Memory3/>
+ <Memory4/>
+ <Project>
+  <ProjectSessionItem path="LCD"/>
+  <ProjectSessionItem path="LCD;LCD"/>
+  <ProjectSessionItem path="LCD;LCD;Core"/>
+  <ProjectSessionItem path="LCD;LCD;Core;Inc"/>
+ </Project>
+ <Register1/>
+ <Register2/>
+ <Register3/>
+ <Register4/>
+ <Threads>
+  <ThreadsWindow showLists=""/>
+ </Threads>
+ <TraceWindow>
+  <Trace enabled="Yes"/>
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" update="Never"/>
+ </Watch1>
+ <Watch2>
+  <Watches active="0" update="Never"/>
+ </Watch2>
+ <Watch3>
+  <Watches active="0" update="Never"/>
+ </Watch3>
+ <Watch4>
+  <Watches active="0" update="Never"/>
+ </Watch4>
+ <Files>
+  <SessionOpenFile windowGroup="DockEditLeft" x="23" y="29" useTextEdit="1" path="Core/Src/main.c" left="0" selected="1" top="66" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="2" y="139" useTextEdit="1" path="Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h" left="0" top="132" codecName="Default"/>
+ </Files>
+ <EMStudioWindow activeProject="LCD" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug Internal" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3199"/>
+</session>

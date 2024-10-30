@@ -1,0 +1,117 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="ADC" version="2" target="8">
+  <configuration
+    Name="Debug"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="None"
+    hidden="No" />
+  <configuration
+    Name="Release"
+    c_preprocessor_definitions="NDEBUG"
+    gcc_debugging_level="None"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="Level 1"
+    hidden="No" />
+  <project Name="ADC">
+    <configuration
+      Name="Common"
+      Placement="Flash"
+      Target="STM32F103C8"
+      arm_architecture="v7M"
+      arm_core_type="Cortex-M3"
+      arm_fpu_type="None"
+      arm_linker_jtag_pad_pre_dr="1"
+      arm_linker_jtag_pad_pre_ir="5"
+      arm_simulator_memory_simulation_filename="$(TargetsDir)/STM32/STM32SimulatorMemory$(HostDLL)"
+      arm_simulator_memory_simulation_parameter="STM32F103C8;0x10000;0x5000"
+      arm_target_loader_applicable_loaders="Flash"
+      arm_target_loader_default_loader="Flash"
+      arm_target_trace_interface_type="None"
+      build_toolchain_directory="$(ARMGCCDIR)"
+      code_completion_options="-isystem$(ToolChainDir)/../$(GCCTarget)/include;-isystem$(ToolChainDir)/../lib/gcc/$(GCCTarget)/$(GCCVersion)/include;-isystem$(ToolChainDir)/../lib/gcc/$(GCCTarget)/$(GCCVersion)/include-fixed;-isystem$(ToolChainDir)/../$(GCCTarget)/include/c++/$(GCCVersion);-isystem$(ToolChainDir)/../$(GCCTarget)/include/c++/$(GCCVersion)/bits"
+      debug_register_definition_file="$(TargetsDir)/STM32/STM32F103_Peripherals.xml"
+      gcc_prefix="$(ARMGCCTARGET:arm-none-eabi)-"
+      gcc_target="$(ARMGCCTARGET:arm-none-eabi)"
+      gcc_version="$(ARMGCCVERSION)"
+      linker_memory_map_file="$(TargetsDir)/STM32/STM32F103C8_MemoryMap.xml"
+      linker_section_placement_file="$(StudioDir)/targets/Cortex_M/flash_placement.xml"
+      macros="DeviceVectorsFile=STM32F103xB.vec"
+      project_directory=""
+      project_type="Executable"
+      property_groups_file_path="$(TargetsDir)/STM32/propertyGroups.xml"
+      target_get_partname_script="GetPartName()"
+      target_match_partname_script="MatchPartName(&quot;$(Target)&quot;)"
+      target_script_file="$(TargetsDir)/STM32/STM32_Target.js"
+      target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)"
+      use_external_gcc="Yes" />
+    <configuration
+      Name="Debug"
+      Target="STM32F103C8"
+      arm_architecture="v7M"
+      arm_core_type="Cortex-M3"
+      arm_fpu_type="None"
+      arm_simulator_memory_simulation_parameter="STM32F103C8;0x10000;0x5000"
+      build_intermediate_directory="Debug"
+      build_output_directory="Debug"
+      build_output_file_name="Debug/ADC.elf"
+      c_preprocessor_definitions="DEBUG;USE_HAL_DRIVER;STM32F103xB"
+      c_user_include_directories="$(ProjectDir)/Core/Inc;$(ProjectDir)/Drivers/STM32F1xx_HAL_Driver/Inc;$(ProjectDir)/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;$(ProjectDir)/Drivers/CMSIS/Device/ST/STM32F1xx/Include;$(ProjectDir)/Drivers/CMSIS/Include"
+      debug_register_definition_file="$(TargetsDir)/STM32/STM32F103_Peripherals.xml"
+      gcc_debugging_level="Level 3"
+      gcc_optimization_level="Optimize For Size"
+      link_linker_script_file="$(ProjectDir)//STM32F103C8TX_FLASH.ld"
+      link_use_linker_script_file="Yes"
+      linker_additional_files=""
+      linker_additional_options="-Wl,--gc-sections;-lm;--specs=nosys.specs;--specs=nano.specs"
+      linker_memory_map_file="$(TargetsDir)/STM32/STM32F103C8_MemoryMap.xml"
+      macros="DeviceVectorsFile=STM32F103xB.vec"
+      target_script_file="$(TargetsDir)/STM32/STM32_Target.js" />
+    <configuration
+      Name="Flash"
+      arm_target_flash_loader_file_path="$(LOADER:$(TargetsDir)/STM32/Release/Loader_rpc.elf)"
+      arm_target_loader_can_erase_all="Yes"
+      arm_target_loader_can_lock_all="No"
+      arm_target_loader_can_lock_range="No"
+      arm_target_loader_can_unlock_all="No"
+      arm_target_loader_can_unlock_range="No"
+      target_reset_script="FLASHReset()" />
+    <configuration Name="RAM" target_reset_script="Reset()" />
+    <configuration
+      Name="Release"
+      Target="STM32F103C8"
+      arm_architecture="v7M"
+      arm_core_type="Cortex-M3"
+      arm_fpu_type="None"
+      arm_simulator_memory_simulation_parameter="STM32F103C8;0x10000;0x5000"
+      build_intermediate_directory="Release"
+      build_output_directory="Release"
+      build_output_file_name="Release/ADC.elf"
+      c_preprocessor_definitions="USE_HAL_DRIVER;STM32F103xB"
+      c_user_include_directories="$(ProjectDir)/Core/Inc;$(ProjectDir)/Drivers/STM32F1xx_HAL_Driver/Inc;$(ProjectDir)/Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;$(ProjectDir)/Drivers/CMSIS/Device/ST/STM32F1xx/Include;$(ProjectDir)/Drivers/CMSIS/Include"
+      debug_register_definition_file="$(TargetsDir)/STM32/STM32F103_Peripherals.xml"
+      gcc_debugging_level="None"
+      gcc_optimization_level="Optimize For Size"
+      link_linker_script_file="$(ProjectDir)//STM32F103C8TX_FLASH.ld"
+      link_use_linker_script_file="Yes"
+      linker_additional_files=""
+      linker_additional_options="-Wl,--gc-sections;-lm;--specs=nosys.specs;--specs=nano.specs"
+      linker_memory_map_file="$(TargetsDir)/STM32/STM32F103C8_MemoryMap.xml"
+      macros="DeviceVectorsFile=STM32F103xB.vec"
+      target_script_file="$(TargetsDir)/STM32/STM32_Target.js" />
+    <folder
+      Name="Core"
+      exclude="Core/;*_PP.s;*_PP.c"
+      filter="*.c;*.h;*.cpp;*.hpp;*.s;*.S"
+      path="Core"
+      recurse="Yes" />
+    <folder
+      Name="Drivers"
+      exclude="Drivers/;*_PP.s;*_PP.c"
+      filter="*.c;*.h;*.cpp;*.hpp;*.s;*.S"
+      path="Drivers"
+      recurse="Yes" />
+    <folder Name="Source Files" />
+  </project>
+</solution>

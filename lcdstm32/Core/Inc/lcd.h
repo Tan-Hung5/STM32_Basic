@@ -1,0 +1,135 @@
+/*
+ * lcd.h
+ *
+ *  Created on: Sep 5, 2024
+ *      Author: Kingj
+ */
+
+#ifndef INC_LCD_H_
+#define INC_LCD_H_
+
+// Hàm chuyển các chân D4-D7 sang chế độ đọc
+void lcd_set_gpio_input(void)
+{
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitStruct.Pin = GPIO_PIN_7 | GPIO_PIN_6 | GPIO_PIN_5 | GPIO_PIN_4;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+}
+
+// Hàm chuyển các chân D4-D7 về chế độ ghi
+void lcd_set_gpio_output(void)
+{
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+    GPIO_InitStruct.Pin = GPIO_PIN_7 | GPIO_PIN_6 | GPIO_PIN_5 | GPIO_PIN_4;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+}
+
+// Hàm kiểm tra cờ bận của LCD
+void lcd_wait_busy(void)
+{
+    lcd_set_gpio_input(); // Chuyển các chân D4-D7 sang chế độ đọc
+
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET); // RS = 0 (lệnh)
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);   // RW = 1 (đọc)
+
+    uint8_t busy;
+    do
+    {
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);  // E = 1
+
+        // Đọc giá trị từ LCD, kiểm tra bit 7 (Busy Flag)
+        busy = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_7);          // Đọc bit 7
+
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET); // E = 0
+        for(uint8_t i = 0; i < 72; i++) asm("NOP"); // Đợi chút
+    } while (busy); // Lặp lại cho đến khi cờ bận = 0
+
+    lcd_set_gpio_output(); // Chuyển lại các chân về chế độ ghi
+}
+
+
+void lcd_write_nibble(uint8_t rs, uint8_t data)
+{
+    // RS = 0: gửi lệnh, RS = 1: gửi dữ liệu
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, rs); // RS
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET); // RW = 0 (ghi)
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);   // E = 1 (kích hoạt LCD)
+
+    // Gửi từng bit của nibble (D4 - D7)
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, (data >> 3) & 0x01); // Bit D7
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, (data >> 2) & 0x01); // Bit D6
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, (data >> 1) & 0x01); // Bit D5
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, (data >> 0) & 0x01); // Bit D4
+
+    // Đợi một thời gian ngắn để ổn định
+    for(uint8_t i = 0; i < 72; i++) asm("NOP");
+
+    // Đưa E xuống 0 để hoàn thành quá trình truyền dữ liệu
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET); // E = 0 (dừng)
+
+    // Đợi thêm một khoảng thời gian ngắn
+    for(uint8_t i = 0; i < 72; i++) asm("NOP");
+}
+
+// Cập nhật các hàm gửi lệnh/dữ liệu để sử dụng kiểm tra cờ bận
+void lcd_send_cmd(uint8_t cmd)
+{
+    lcd_wait_busy(); // Chờ cho đến khi LCD sẵn sàng
+    lcd_write_nibble(0, (cmd >> 4) & 0x0F);
+    lcd_write_nibble(0, cmd & 0x0F);
+}
+
+void lcd_send_data(uint8_t data)
+{
+    lcd_wait_busy(); // Chờ cho đến khi LCD sẵn sàng
+    lcd_write_nibble(1, (data >> 4) & 0x0F);
+    lcd_write_nibble(1, data & 0x0F);
+}
+
+// Hàm khởi tạo LCD
+void lcd_init(void)
+{
+    HAL_Delay(20); // Chờ nguồn ổn định
+
+    lcd_write_nibble(0, 0x03); HAL_Delay(5);
+    lcd_write_nibble(0, 0x03); HAL_Delay(1);
+    lcd_write_nibble(0, 0x03); HAL_Delay(1);
+
+    lcd_write_nibble(0, 0x02); HAL_Delay(1);
+
+    lcd_send_cmd(0x28);  // Function Set: 4-bit, 2 dòng, 5x8
+    lcd_send_cmd(0x0C);  // Display ON, tắt con trỏ
+    lcd_send_cmd(0x01);  // Clear display
+    lcd_send_cmd(0x06);  // Entry mode set: tăng con trỏ
+}
+
+void lcd_display(char *data)
+{
+	while(*data)
+	{
+
+		lcd_send_data(*data++);
+	}
+}
+
+void lcd_gotoxy(uint8_t row, uint8_t col)
+{
+	uint8_t coordinates = 0;
+
+	switch(row)
+	{
+	case 0:
+		coordinates = 0x80 | col;
+		break;
+	case 1:
+		coordinates = 0xC0 | col;
+		break;
+	}
+	lcd_send_cmd(coordinates);
+}
+
+#endif /* INC_LCD_H_ */
